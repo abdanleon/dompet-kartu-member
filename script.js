@@ -340,7 +340,7 @@ cardContainer.addEventListener('click', function(e) {
 
     cardBox.classList.remove('search-match');
     activeCard = cardBox;
-    modalTitle.textContent = 'Edit Kartu Member';
+    modalTitle.textContent = 'Edit Kartu';
     submitBtn.textContent = 'Simpan Perubahan';
     deleteCardBtn.classList.add('visible');
 
