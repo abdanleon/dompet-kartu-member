@@ -8,11 +8,11 @@ Layanan (Website) yang dapat digunakan oleh siapa saja untuk menyimpan beragam K
   <li>Kode batang dapat dipindai (scan) dengan berbagai alat.</li>
 </ul>
 
-# Mengenal Fitur
+# Fitur Layanan
 <ul>
   <li>Nama Pemilik : Ubah nama dompet sesuai nama Anda.</li>
-  <li>Tambah Kartu : Tambahkan kartu member baru, cukup isi nama kartu, pilih kategori, dan isi nomor kartu.</li>
-  <li>Edit Kartu : Tinggal tap/klik kartu yang ingin anda ubah</li>
+  <li>Tambah Kartu : Cukup isi nama kartu, pilih kategori kartu, dan isi nomor kartu.</li>
+  <li>Edit Kartu : Tinggal tap/klik kartu yang ingin Anda ubah</li>
   <li>Hapus Kartu : Menghapus kartu dengan mudah.</li>
-  <li>Pencarian Kartu : Cari kartu Anda dengan mudah, cukup ketik beberapa huruf.</li>
+  <li>Pencarian : Cari kartu dengan mudah, cukup ketik beberapa huruf.</li>
 </ul>
