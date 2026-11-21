@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dompet Kartu Member - Praktis, Aman, Gratis</title>
+<link rel="icon" href="image/icon.ico" type="image/x-icon">
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+<link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+<div class="nav">
+	<div class="nav-name">
+    	<i class="bi bi-person-workspace"></i>
+        <span class="pc">Nama Pemilik</span>
+        <span class="mobile">Nama</span>
+     </div>
+    <div class="nav-search">
+    	<i class="bi bi-search"></i>
+        <span class="pc">Pencarian Kartu</span>
+        <span class="mobile">Cari</span>
+    </div>
+    <div class="nav-terms">
+    	<i class="bi bi-file-earmark-medical"></i>
+        <span class="pc">Syarat & Ketentuan</span>
+        <span class="mobile">S&K</span>
+    </div>
+    <div class="nav-top">
+    	<i class="bi bi-arrow-up-circle"></i>
+    	<span class="pc">Kembali ke Atas</span>
+        <span class="mobile">Ke Atas</span>
+    </div>
+</div>
+
+<div class="hero">
+	<div class="icon"><i class="bi bi-credit-card-2-front-fill"></i></div>
+    <p>Halo <span class="username">tamu</span>!</p>
+	<h1><span class="total-card">1</span> Kartu Tersimpan</h1>
+    <button id="addCardBtn"><i class="bi bi-plus-lg"></i> Tambah Kartu</button>
+</div>
+
+<div class="card" id="cardContainer"></div>
+
+<div class="modal-overlay" id="cardModal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h2 id="modalTitle">Edit Kartu Member</h2>
+            <button type="button" class="close-btn" id="closeModalBtn" title="Tutup">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+        <form id="cardForm">
+            <div class="form-group">
+                <label for="cardName">Nama Kartu</label>
+                <input type="text" id="cardName" placeholder="Contoh: Alfamart" required>
+            </div>
+            <div class="form-group">
+                <label for="cardCategory">Kategori</label>
+                <select id="cardCategory" required>
+                    <option value="" disabled selected>Pilih Kategori</option>
+                    <option value="Ritel & Toko">Ritel & Toko</option>
+                    <option value="Kuliner">Kuliner</option>
+                    <option value="Kesehatan">Kesehatan</option>
+                    <option value="Olahraga">Olahraga</option>
+                    <option value="Perawatan Diri">Perawatan Diri</option>
+                    <option value="Otomotif">Otomotif</option>
+                    <option value="Hiburan">Hiburan</option>
+                    <option value="Komunitas">Komunitas</option>
+                    <option value="Layanan">Layanan</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="cardNumber">Nomor Kartu</label>
+                <input type="text" id="cardNumber" placeholder="Contoh: 12345678910" required>
+            </div>
+            <button type="submit" class="save-btn" id="submitBtn">Simpan Perubahan</button>
+            <button type="button" class="delete-btn" id="deleteCardBtn">Hapus Kartu</button>
+        </form>
+    </div>
+</div>
+
+<div class="modal-overlay" id="ownerModal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h2>Pemilik Dompet</h2>
+            <button type="button" class="close-btn" id="closeOwnerModalBtn" title="Tutup">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+        <form id="ownerForm">
+            <div class="form-group">
+                <label for="ownerNameInput">Tulis Nama Anda</label>
+                <input type="text" id="ownerNameInput" placeholder="Contoh: Abdan" required>
+            </div>
+            <button type="submit" class="save-btn">Simpan Nama</button>
+        </form>
+    </div>
+</div>
+
+<div class="modal-overlay" id="searchModal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h2>Pencarian</h2>
+            <button type="button" class="close-btn" id="closeSearchModalBtn" title="Tutup">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+        <form id="searchForm">
+            <div class="form-group">
+                <label for="searchCardInput">Tulis Nama Kartu</label>
+                <input type="text" id="searchCardInput" placeholder="Contoh: Alfamart" required>
+            </div>
+            <p class="search-feedback" id="searchFeedback">Maaf, kartu tidak ditemukan</p>
+            <button type="submit" class="save-btn">Cari Kartu</button>
+        </form>
+    </div>
+</div>
+
+<div class="modal-overlay" id="termsModal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h2>Syarat &amp; Ketentuan</h2>
+            <button type="button" class="close-btn" id="closeTermsModalBtn" title="Tutup">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+        <div class="terms-content">
+            <h3>Tentang Kami</h3>
+            <p>Dompet Kartu Member adalah layanan (Website) yang dapat digunakan oleh siapa saja untuk menyimpan beragam Kartu Member dengan mudah dan aman di satu tempat. Kami tidak berafiliasi atau bekerjasama dengan bisnis atau jasa apapun, mohon menggunakan layanan dengan bijak.</p>
+            <h3>Keuntungan</h3>
+            <ul>
+                <li>Gratis digunakan.</li>
+                <li>Tidak perlu membuat akun.</li>
+                <li>Data disimpan aman.</li>
+                <li>Bebas tambah kartu berapa pun, tidak ada batasan.</li>
+                <li>Kode batang dapat dipindai (scan) dengan berbagai alat, mulai dari Kamera HP, Website Pemindai, atau alat khusus seperti Barcode Scanner. Bila memakai Barcode Scanner, disarankan untuk meningkatkan kecerahan layar agar kode mudah terbaca.</li>
+            </ul>
+
+            <h3>Definisi</h3>
+            <ul>
+                <li><strong>Kartu Member</strong> : Identitas resmi yang membuktikan bahwa seseorang terdaftar sebagai bagian dari suatu organisasi, komunitas, atau program pelanggan tertentu.</li>
+                <li><strong>Pemilik Dompet</strong> : Nama pengguna yang bisa diganti sesuai keinginan.</li>
+                <li><strong>Nama Kartu</strong> : Nama bisnis atau jasa yang mengeluarkan kartu member.</li>
+                <li><strong>Nomor Kartu</strong> : Nomor identitas yang diberikan kepada pemilik kartu member.</li>
+                <li><strong>Kode Batang (Code 128)</strong> : Representasi data visual yang dapat dibaca dengan alat pemindai barcode.</li>
+            </ul>
+
+            <h3>Perihal Data</h3>
+            <ul>
+                <li>Agar data tersimpan dengan baik, mohon akses layanan ini menggunakan browser seperti Chrome atau Safari.</li>
+                <li>Data pribadi aman, seperti nomor kartu dan nama dompet, data hanya disimpan di Browser (peramban web).</li>
+                <li>Kami tidak menyimpan data pengguna, layanan berjalan 100% di Browser.</li>
+                <li>Data tidak akan hilang meski Tab Halaman ditutup atau keluar dari Aplikasi Browser.</li>
+                <li>Data akan hilang jika Anda menghapus History atau Cache Browser, menggunakan mode penyamaran (Incognito), menggunakan Browser yang berbeda, dan mencopot aplikasi Browser.</li>
+                <li>Seluruh data merupakan tanggung jawab pengguna, kami tidak bertanggung jawab atas kehilangan atau kerusakan data akibat kelalaian pengguna.</li>
+            </ul>
+
+            <h3>Penerimaan Ketentuan</h3>
+            <p>Dengan membuka dan membaca halaman Syarat &amp; Ketentuan ini, pengguna dianggap telah memahami dan menyetujui seluruh aturan yang tercantum, termasuk setiap pembaruan atau perubahan yang dilakukan di kemudian hari.</p>
+
+            <p class="terms-updated">Halaman ini diperbarui pada tanggal<br />21 November 2026</p>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+	<p>Baca <span>S&K</span> sebelum menggunakan layanan ini.</p>
+	<p>Dibuat oleh <a href="https://abdanleon.blogspot.com/" target="_blank">Abdan Leon</a> dan Google Gemini &#8226; <a href="#" target="_blank">Lihat Github</a></p>
+</div>
+<script src="./script.js"></script>
+</body>
+</html>
