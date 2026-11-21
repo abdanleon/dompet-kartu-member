@@ -18,4 +18,4 @@ Aplikasi (berbasis web) yang dapat digunakan oleh siapa saja untuk menyimpan ber
 </ul>
 
 # Tampilan Aplikasi
-<img src="https://raw.githubusercontent.com/abdanleon/dompet-kartu-member/refs/heads/main/image/ui-mobile.png"/>
+<img width="50%" src="https://raw.githubusercontent.com/abdanleon/dompet-kartu-member/refs/heads/main/image/ui.png"/>
