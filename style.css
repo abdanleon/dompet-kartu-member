@@ -63,7 +63,7 @@ h1, h2, h3, p {margin: 0;}
 .search-feedback.visible {display: block;}
 .save-btn {width: 100%; background: #F4CE14; color: #111; font-weight: bold; font-size: 0.9rem; padding: 12px; border-radius: 50px; margin: 10px 0; transition: opacity 0.2s;}
 .save-btn:hover {opacity: 0.8;}
-.delete-btn {display: none; width: 100%; background: #eee; color: #111; font-weight: bold; font-size: 0.9rem; padding: 12px; border-radius: 50px; margin: 0; transition: opacity 0.2s;}
+.delete-btn {display: none; width: 100%; background: #eee; color: #111; font-weight: bold; font-size: 0.9rem; padding: 12px; border-radius: 50px; margin: 0 0 10px; transition: opacity 0.2s;}
 .delete-btn.visible {display: block;}
 .delete-btn:hover {opacity: 0.65;}
 
