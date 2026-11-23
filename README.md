@@ -15,4 +15,4 @@ Aplikasi (berbasis web) yang dapat digunakan oleh siapa saja untuk menyimpan ber
 - **Pencarian** : Cari kartu dengan mudah, cukup ketik beberapa huruf.
 
 # Tampilan Aplikasi
-<img width="30%" src="https://raw.githubusercontent.com/abdanleon/dompet-kartu-member/refs/heads/main/image/example.png"/>
+<img width="50%" src="https://raw.githubusercontent.com/abdanleon/dompet-kartu-member/refs/heads/main/image/example.png"/>
