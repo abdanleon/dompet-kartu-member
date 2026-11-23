@@ -1,21 +1,18 @@
 # Dompet Kartu Member
 Aplikasi (berbasis web) yang dapat digunakan oleh siapa saja untuk menyimpan beragam Kartu Member di satu tempat.
-<ul>
-  <li>Gratis digunakan.</li>
-  <li>Tidak perlu membuat akun.</li>
-  <li>Data disimpan aman.</li>
-  <li>Bebas tambah kartu berapa pun, tidak ada batasan.</li>
-  <li>Kode batang dapat dipindai (scan) dengan berbagai alat.</li>
-</ul>
+- Gratis digunakan.
+- Tidak perlu membuat akun.
+- Data disimpan aman.
+- Bebas tambah kartu berapa pun, tidak ada batasan.
+- Kode batang dapat dipindai (scan) dengan berbagai alat.
+- Bisa diakses offline (tanpa internet) dengan fitur terbatas.
 
 # Fitur Aplikasi
-<ul>
-  <li>Nama Pemilik : Ubah nama dompet sesuai nama Anda.</li>
-  <li>Tambah Kartu : Cukup isi nama kartu, pilih kategori kartu, dan isi nomor kartu.</li>
-  <li>Edit Kartu : Tinggal tap/klik kartu yang ingin Anda ubah.</li>
-  <li>Hapus Kartu : Menghapus kartu dengan mudah.</li>
-  <li>Pencarian : Cari kartu dengan mudah, cukup ketik beberapa huruf.</li>
-</ul>
+- **Nama Pemilik** : Ubah nama dompet sesuai nama Anda.
+- **Tambah Kartu** : Cukup isi nama kartu, pilih kategori kartu, dan isi nomor kartu.
+- **Edit Kartu** : Tinggal tap/klik kartu yang ingin Anda ubah.
+- **Hapus Kartu** : Menghapus kartu dengan mudah.
+- **Pencarian** : Cari kartu dengan mudah, cukup ketik beberapa huruf.
 
 # Tampilan Aplikasi
-<img width="50%" src="https://raw.githubusercontent.com/abdanleon/dompet-kartu-member/refs/heads/main/image/ui.png"/>
+<img width="30%" src="https://raw.githubusercontent.com/abdanleon/dompet-kartu-member/refs/heads/main/image/example.png"/>
