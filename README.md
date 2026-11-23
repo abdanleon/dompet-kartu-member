@@ -1,5 +1,5 @@
 # Dompet Kartu Member
-Aplikasi (berbasis web) yang dapat digunakan oleh siapa saja untuk menyimpan beragam Kartu Member di satu tempat.
+Aplikasi (berbasis web) yang dapat digunakan untuk menyimpan beragam Kartu Member di satu tempat.
 - Gratis digunakan.
 - Tidak perlu membuat akun.
 - Data disimpan aman.
@@ -14,5 +14,5 @@ Aplikasi (berbasis web) yang dapat digunakan oleh siapa saja untuk menyimpan ber
 - **Hapus Kartu** : Menghapus kartu dengan mudah.
 - **Pencarian** : Cari kartu dengan mudah, cukup ketik beberapa huruf.
 
-# Tampilan Aplikasi
+# Contoh Penggunaan
 <img width="50%" src="https://raw.githubusercontent.com/abdanleon/dompet-kartu-member/refs/heads/main/image/example.png"/>
