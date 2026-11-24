@@ -34,12 +34,25 @@ const termsContent = termsModal.querySelector('.terms-content');
 
 const navTopBtn = document.querySelector('.nav-top');
 
+const cardMenuModal = document.getElementById('cardMenuModal');
+const closeCardMenuBtn = document.getElementById('closeCardMenuBtn');
+const menuCardTitle = document.getElementById('menuCardTitle');
+const zoomBarcodeBtn = document.getElementById('zoomBarcodeBtn');
+const copyNumberBtn = document.getElementById('copyNumberBtn');
+const copyNumberLabel = document.getElementById('copyNumberLabel');
+const editCardMenuBtn = document.getElementById('editCardMenuBtn');
+const deleteCardMenuBtn = document.getElementById('deleteCardMenuBtn');
+
+const barcodeFullscreen = document.getElementById('barcodeFullscreen');
+const closeBarcodeFullscreenBtn = document.getElementById('closeBarcodeFullscreenBtn');
+const zoomedBarcodeSvg = document.getElementById('zoomedBarcodeSvg');
+const zoomedBarcodeFallback = document.getElementById('zoomedBarcodeFallback');
+
 const cardModal = document.getElementById('cardModal');
 const modalTitle = document.getElementById('modalTitle');
 const closeModalBtn = document.getElementById('closeModalBtn');
 const cardForm = document.getElementById('cardForm');
 const submitBtn = document.getElementById('submitBtn');
-const deleteCardBtn = document.getElementById('deleteCardBtn');
 
 const inputName = document.getElementById('cardName');
 const inputCategory = document.getElementById('cardCategory');
@@ -47,6 +60,34 @@ const inputNumber = document.getElementById('cardNumber');
 
 let activeCard = null;
 let isSearchingCard = false;
+let copyLabelTimer = null;
+
+// Reset label tombol salin nomor ke default
+function resetCopyButtonLabel() {
+    if (copyLabelTimer) {
+        clearTimeout(copyLabelTimer);
+        copyLabelTimer = null;
+    }
+    copyNumberLabel.textContent = 'Salin Nomor';
+}
+
+// Salin teks ke clipboard dengan fallback execCommand
+async function copyTextToClipboard(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return true;
+    }
+    const tempInput = document.createElement('textarea');
+    tempInput.value = text;
+    tempInput.setAttribute('readonly', '');
+    tempInput.style.position = 'fixed';
+    tempInput.style.opacity = '0';
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    const copied = document.execCommand('copy');
+    document.body.removeChild(tempInput);
+    return copied;
+}
 
 // Gulir halus ke paling atas halaman
 navTopBtn.addEventListener('click', function() {
@@ -248,6 +289,40 @@ function renderBarcode(svgEl, fallbackEl, number) {
     }
 }
 
+// Render barcode besar ke layar penuh putih
+function renderFullscreenBarcode(number) {
+    zoomedBarcodeSvg.innerHTML = '';
+    zoomedBarcodeFallback.textContent = number;
+    zoomedBarcodeFallback.style.display = 'none';
+    zoomedBarcodeSvg.style.display = 'block';
+
+    if (typeof JsBarcode === 'undefined') {
+        zoomedBarcodeSvg.style.display = 'none';
+        zoomedBarcodeFallback.style.display = 'block';
+        return;
+    }
+
+    try {
+        const barWidth = number.length > 18 ? 2 : number.length > 12 ? 2.6 : 3.2;
+        JsBarcode(zoomedBarcodeSvg, number, {
+            format: 'CODE128',
+            width: barWidth,
+            height: 120,
+            displayValue: true,
+            font: 'Google Sans',
+            fontOptions: 'bold',
+            fontSize: 22,
+            textMargin: 8,
+            margin: 12,
+            background: '#ffffff',
+            lineColor: '#111111'
+        });
+    } catch (err) {
+        zoomedBarcodeSvg.style.display = 'none';
+        zoomedBarcodeFallback.style.display = 'block';
+    }
+}
+
 // Ambil seluruh data kartu dari DOM saat ini
 function collectCardsFromDOM() {
     return Array.from(cardContainer.querySelectorAll('.card-box')).map((cardBox) => ({
@@ -321,28 +396,72 @@ function renderCards(cards) {
     updateTotalCards();
 }
 
-// Klik tombol Tambah Kartu -> buka modal mode tambah
-addCardBtn.addEventListener('click', function() {
-    activeCard = null;
-    modalTitle.textContent = 'Tambah Kartu Baru';
-    submitBtn.textContent = 'Tambah Kartu';
-    deleteCardBtn.classList.remove('visible');
-    cardForm.reset();
+// Tutup pop-up Menu Kartu
+function closeCardMenuModal() {
+    cardMenuModal.classList.remove('active');
+    resetCopyButtonLabel();
+}
 
-    cardModal.classList.add('active');
-    inputName.focus();
+closeCardMenuBtn.addEventListener('click', function() {
+    closeCardMenuModal();
+    activeCard = null;
 });
 
-// Klik salah satu .card-box -> buka modal mode edit
-cardContainer.addEventListener('click', function(e) {
-    const cardBox = e.target.closest('.card-box');
-    if (!cardBox) return;
+cardMenuModal.addEventListener('click', function(e) {
+    if (e.target === cardMenuModal) {
+        closeCardMenuModal();
+        activeCard = null;
+    }
+});
 
-    cardBox.classList.remove('search-match');
-    activeCard = cardBox;
+// Tutup tampilan barcode layar penuh
+function closeBarcodeFullscreen() {
+    barcodeFullscreen.classList.remove('active');
+}
+
+closeBarcodeFullscreenBtn.addEventListener('click', closeBarcodeFullscreen);
+
+// Tombol Perbesar Barcode di Menu Kartu
+zoomBarcodeBtn.addEventListener('click', function() {
+    if (!activeCard) return;
+    const number = (activeCard.querySelector('svg.code').dataset.value || '').trim();
+    closeCardMenuModal();
+    renderFullscreenBarcode(number);
+    barcodeFullscreen.classList.add('active');
+});
+
+// Tombol Salin Nomor di Menu Kartu
+copyNumberBtn.addEventListener('click', async function() {
+    if (!activeCard) return;
+    const number = (activeCard.querySelector('svg.code').dataset.value || '').trim();
+    if (!number) return;
+
+    try {
+        const ok = await copyTextToClipboard(number);
+        if (ok) {
+            copyNumberLabel.textContent = 'Nomor Berhasil Disalin';
+            if (copyLabelTimer) {
+                clearTimeout(copyLabelTimer);
+            }
+            copyLabelTimer = setTimeout(() => {
+                copyNumberLabel.textContent = 'Salin Nomor';
+                copyLabelTimer = null;
+            }, 2000);
+        }
+    } catch (err) {
+        console.warn('Gagal menyalin nomor kartu:', err);
+    }
+});
+
+// Tombol Edit Kartu di Menu Kartu
+editCardMenuBtn.addEventListener('click', function() {
+    if (!activeCard) return;
+
+    const cardBox = activeCard;
+    closeCardMenuModal();
+
     modalTitle.textContent = 'Edit Kartu Member';
     submitBtn.textContent = 'Simpan Perubahan';
-    deleteCardBtn.classList.add('visible');
 
     inputName.value = cardBox.querySelector('.name').textContent.trim();
     const currentCategory = cardBox.querySelector('.category').textContent.trim();
@@ -354,21 +473,44 @@ cardContainer.addEventListener('click', function(e) {
     inputName.focus();
 });
 
-// Hapus kartu yang sedang diedit
-deleteCardBtn.addEventListener('click', function() {
+// Tombol Hapus Kartu di Menu Kartu
+deleteCardMenuBtn.addEventListener('click', function() {
     if (!activeCard) return;
 
     activeCard.remove();
     updateTotalCards();
     saveCardsToStorage();
-    closeModal();
+    closeCardMenuModal();
+    activeCard = null;
 });
 
-// Tutup modal
+// Klik tombol Tambah Kartu -> buka modal mode tambah
+addCardBtn.addEventListener('click', function() {
+    activeCard = null;
+    modalTitle.textContent = 'Tambah Kartu Baru';
+    submitBtn.textContent = 'Tambah Kartu';
+    cardForm.reset();
+
+    cardModal.classList.add('active');
+    inputName.focus();
+});
+
+// Klik salah satu .card-box -> buka pop-up Menu Kartu
+cardContainer.addEventListener('click', function(e) {
+    const cardBox = e.target.closest('.card-box');
+    if (!cardBox) return;
+
+    cardBox.classList.remove('search-match');
+    activeCard = cardBox;
+    resetCopyButtonLabel();
+    menuCardTitle.textContent = cardBox.querySelector('.name').textContent.trim();
+    cardMenuModal.classList.add('active');
+});
+
+// Tutup modal tambah/edit kartu
 function closeModal() {
     cardModal.classList.remove('active');
     activeCard = null;
-    deleteCardBtn.classList.remove('visible');
 }
 
 closeModalBtn.addEventListener('click', closeModal);
@@ -381,7 +523,12 @@ cardModal.addEventListener('click', function(e) {
 
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
-        if (termsModal.classList.contains('active')) {
+        if (barcodeFullscreen.classList.contains('active')) {
+            closeBarcodeFullscreen();
+        } else if (cardMenuModal.classList.contains('active')) {
+            closeCardMenuModal();
+            activeCard = null;
+        } else if (termsModal.classList.contains('active')) {
             closeTermsModal();
         } else if (searchModal.classList.contains('active')) {
             closeSearchModal();
