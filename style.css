@@ -19,15 +19,13 @@ h1, h2, h3, p {margin: 0;}
 /* Hero */
 .hero {text-align: center; margin: 0 0 30px;}
 .hero .icon img {height: 70px; margin: 10px 0; animation: heartbeat 3s ease-in-out infinite;}
+@keyframes heartbeat {0%{-webkit-transform:scale(1);transform:scale(1)} 14%{-webkit-transform:scale(0.9);transform:scale(0.9)} 28%{-webkit-transform:scale(1);transform:scale(1)} 42%{-webkit-transform:scale(0.9);transform:scale(0.9)} 70%{-webkit-transform:scale(1);transform:scale(1)}}
 .hero p {text-transform: capitalize; margin-bottom: 5px;}
 .hero h1 {font-size: 1.5rem; margin-bottom: 10px;}
 .hero button {display: inline-block; background: #F4CE14; color: #111; font-weight: bold; padding: 0 20px 0 18px; line-height: 2.5; border-radius: 50px;}
 .hero button:hover {opacity: 0.8;}
 
-/* Animasi */
-@keyframes heartbeat {0%{-webkit-transform:scale(1);transform:scale(1)} 14%{-webkit-transform:scale(0.9);transform:scale(0.9)} 28%{-webkit-transform:scale(1);transform:scale(1)} 42%{-webkit-transform:scale(0.9);transform:scale(0.9)} 70%{-webkit-transform:scale(1);transform:scale(1)}}
-
-/* Kartu */
+/* Card Box */
 .card {display: grid; grid-template-columns: repeat(4, 1fr); grid-gap: 15px; grid-auto-flow: row;}
 .card .card-box {max-width: 400px; background: #fff; border: 1px solid #bbb; border-radius: 15px; padding: 20px 15px 18px; scroll-margin-top: 24px; transition: box-shadow 0.2s ease, border-color 0.2s ease;}
 .card .card-box.search-match {border: 1px solid #111;}
@@ -38,11 +36,12 @@ h1, h2, h3, p {margin: 0;}
 .card .card-box svg.code {display: block; max-width: 100%; height: auto; background: #fff; padding: 5px 0 0; border-radius: 8px;}
 .card .card-box .number-fallback {font-size: 1.2rem; text-align: right; margin-top: 4px;}
 
-/* Pop-up */
+/* Pop-up Modal */
 .modal-overlay {display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(2px); justify-content: center; align-items: center; padding: 20px; z-index: 1000;}
 .modal-overlay.active {display: flex;}
 .modal-box {background: #fff; width: 100%; max-width: 380px; border-radius: 16px; padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); animation: popIn 0.2s ease-out;}
 @keyframes popIn {from {opacity: 0; transform: scale(0.95);} to {opacity: 1; transform: scale(1);}}
+@keyframes sheetUp {from {opacity: 0; transform: translateY(24px);} to {opacity: 1; transform: translateY(0);}}
 .modal-header {display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;}
 .modal-header h2 {font-size: 1.15rem; font-weight: 700;}
 .close-btn {background: #f2f2f2; color: #111; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; transition: background 0.2s;}
@@ -63,25 +62,31 @@ h1, h2, h3, p {margin: 0;}
 .search-feedback.visible {display: block;}
 .save-btn {width: 100%; background: #F4CE14; color: #111; font-weight: bold; font-size: 0.9rem; padding: 12px; border-radius: 50px; margin: 10px 0; transition: opacity 0.2s;}
 .save-btn:hover {opacity: 0.8;}
-.delete-btn {display: none; width: 100%; background: #eee; color: #111; font-weight: bold; font-size: 0.9rem; padding: 12px; border-radius: 50px; margin: 0 0 10px; transition: opacity 0.2s;}
-.delete-btn.visible {display: block;}
-.delete-btn:hover {opacity: 0.65;}
+
+/* Card Menu */
+.menu-sheet-overlay {align-items: flex-end; justify-content: center; padding: 0;}
+.menu-sheet-box {width: 100%; max-width: 420px; border-radius: 20px 20px 0 0; padding: 20px 20px 25px; animation: sheetUp 0.2s ease-out;}
+.menu-sheet-box .modal-header {margin-bottom: 5px;}
+.menu-sheet-box .modal-header h2 {text-transform: uppercase; font-size: 1rem; letter-spacing: 0.02em; padding-right: 12px;}
+.menu-list {display: flex; flex-direction: column;}
+.menu-action-btn {width: 100%; background: none; font-weight: bold; font-size: 0.9rem; padding: 15px 0; border-bottom: 1px dashed #bbb; display: flex; align-items: center; justify-content: flex-start; gap: 10px; text-align: left; transition: opacity 0.2s, background 0.2s;}
+.menu-action-btn:last-child {padding: 15px 0 0; border-bottom: none;}
+.menu-action-btn .bi {font-size: 1.2rem; flex-shrink: 0;}
+.menu-action-btn:hover {opacity: 0.8;}
+
+/* Barcode Full */
+.barcode-fullscreen {display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #ffffff; z-index: 1100; justify-content: center; align-items: center; padding: 24px;}
+.barcode-fullscreen.active {display: flex;}
+.barcode-fullscreen .close-btn {position: fixed; top: 20px; right: 20px; width: 38px; height: 38px; font-size: 1.25rem; z-index: 1101;}
+.barcode-fullscreen-inner {width: 100%; max-width: 680px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;}
+.barcode-fullscreen-inner svg.zoomed-code {display: block; max-width: 100%; height: auto; background: #ffffff;}
+.barcode-fullscreen-inner .zoomed-fallback {display: none; font-size: 2rem; font-weight: bold; letter-spacing: 2px; color: #111; word-break: break-all;}
 
 /* Footer */
 .footer {text-align: center; font-size: 0.7rem; margin: 25px 0 0;}
 .footer p:first-child {margin-bottom: 5px;}
 .footer p span {background: #F4CE14; padding: 0 2px;}
 
-/* Responsif */
-@media (max-width: 900px) {
-.card {grid-template-columns: repeat(2, 1fr);}
-}
-@media (max-width: 500px) {
-body {padding: 30px 20px 90px;}
-.nav {grid-gap: 0;}
-.nav div {flex-direction: column;}
-.nav div .bi {font-size: 1.3rem;}
-.nav div .pc {display: none;}
-.nav div .mobile {display: inline-block; font-size: 0.7rem;}
-.card {grid-template-columns: repeat(1, 1fr); margin: 0 auto;}
-}
+/* Responsive */
+@media (max-width: 900px) {.card {grid-template-columns: repeat(2, 1fr);}}
+@media (max-width: 500px) {body {padding: 30px 20px 90px;} .nav {grid-gap: 0;} .nav div {flex-direction: column;} .nav div .bi {font-size: 1.3rem;} .nav div .pc {display: none;} .nav div .mobile {display: inline-block; font-size: 0.7rem;} .card {grid-template-columns: repeat(1, 1fr); margin: 0 auto;} .menu-sheet-box {max-width: 100%;}}
