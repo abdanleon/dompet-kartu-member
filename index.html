@@ -42,6 +42,45 @@
 
 <div class="card" id="cardContainer"></div>
 
+<div class="modal-overlay menu-sheet-overlay" id="cardMenuModal">
+    <div class="modal-box menu-sheet-box">
+        <div class="modal-header">
+            <h2 id="menuCardTitle">Nama Kartu</h2>
+            <button type="button" class="close-btn" id="closeCardMenuBtn" title="Tutup">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+        <div class="menu-list">
+            <button type="button" class="menu-action-btn" id="zoomBarcodeBtn">
+                <i class="bi bi-upc-scan"></i>
+                <span class="menu-btn-label">Perbesar Barcode</span>
+            </button>
+            <button type="button" class="menu-action-btn" id="copyNumberBtn">
+                <i class="bi bi-back"></i>
+                <span class="menu-btn-label" id="copyNumberLabel">Salin Nomor</span>
+            </button>
+            <button type="button" class="menu-action-btn" id="editCardMenuBtn">
+                <i class="bi bi-pencil-square"></i>
+                <span class="menu-btn-label">Edit Kartu</span>
+            </button>
+            <button type="button" class="menu-action-btn" id="deleteCardMenuBtn">
+                <i class="bi bi-trash3"></i>
+                <span class="menu-btn-label">Hapus Kartu</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="barcode-fullscreen" id="barcodeFullscreen">
+    <button type="button" class="close-btn" id="closeBarcodeFullscreenBtn" title="Tutup">
+        <i class="bi bi-x-lg"></i>
+    </button>
+    <div class="barcode-fullscreen-inner">
+        <svg class="zoomed-code" id="zoomedBarcodeSvg"></svg>
+        <div class="zoomed-fallback" id="zoomedBarcodeFallback"></div>
+    </div>
+</div>
+
 <div class="modal-overlay" id="cardModal">
     <div class="modal-box">
         <div class="modal-header">
@@ -75,7 +114,6 @@
                 <input type="text" id="cardNumber" placeholder="Contoh: 12345678910" required>
             </div>
             <button type="submit" class="save-btn" id="submitBtn">Simpan Perubahan</button>
-            <button type="button" class="delete-btn" id="deleteCardBtn">Hapus Kartu</button>
         </form>
     </div>
 </div>
@@ -144,7 +182,7 @@
                 <li><strong>Pemilik Dompet</strong> : Nama pengguna yang bisa diganti sesuai keinginan.</li>
                 <li><strong>Nama Kartu</strong> : Nama bisnis atau jasa yang mengeluarkan kartu member.</li>
                 <li><strong>Nomor Kartu</strong> : Nomor identitas yang diberikan kepada pemilik kartu member.</li>
-                <li><strong>Kode Batang (Code 128)</strong> : Representasi data visual yang dapat dibaca dengan alat pemindai barcode.</li>
+                <li><strong>Kode Batang (Barcode)</strong> : Representasi data visual yang dapat dibaca dengan alat pemindai barcode.</li>
             </ul>
 
             <h3>Perihal Data</h3>
