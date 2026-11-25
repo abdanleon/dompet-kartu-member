@@ -15,4 +15,4 @@ Aplikasi (berbasis web) yang dapat digunakan untuk menyimpan beragam Kartu Membe
 - **Pencarian** : Cari kartu dengan mudah, cukup ketik beberapa huruf.
 
 # Contoh Penggunaan
-<img width="50%" src="https://raw.githubusercontent.com/abdanleon/dompet-kartu-member/refs/heads/main/image/example.jpg"/>
+<img width="50%" src="https://raw.githubusercontent.com/abdanleon/dompet-kartu-member/refs/heads/main/example.jpg"/>
