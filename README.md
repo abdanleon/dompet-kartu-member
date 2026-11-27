@@ -1,5 +1,5 @@
 # Dompet Kartu Member
-Dompet Kartu Member adalah aplikasi (berbasis Website) yang dapat digunakan oleh siapa saja untuk menyimpan beragam Kartu Member dengan mudah dan aman di satu tempat.
+Aplikasi (berbasis Website) yang dapat digunakan oleh siapa saja untuk menyimpan beragam Kartu Member dengan mudah dan aman di satu tempat.
 - Gratis digunakan.
 - Tidak perlu membuat akun.
 - Data disimpan aman.
